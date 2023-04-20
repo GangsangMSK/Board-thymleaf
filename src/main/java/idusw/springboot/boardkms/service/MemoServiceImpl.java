@@ -1,8 +1,8 @@
-package iducs.springboot.boardkms.service;
+package idusw.springboot.boardkms.service;
 
-import iducs.springboot.boardkms.domain.Memo;
-import iducs.springboot.boardkms.entity.MemoEntity;
-import iducs.springboot.boardkms.repository.MemoRepository;
+import idusw.springboot.boardkms.domain.Memo;
+import idusw.springboot.boardkms.entity.MemoEntity;
+import idusw.springboot.boardkms.repository.MemoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package iducs.springboot.boardkms.repository;
+package idusw.springboot.boardkms.repository;
 
-import iducs.springboot.boardkms.entity.MemoEntity;
+import idusw.springboot.boardkms.entity.MemoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
-package iducs.springboot.boardkms.service;
+package idusw.springboot.boardkms.service;
 
-import iducs.springboot.boardkms.domain.Memo;
+import idusw.springboot.boardkms.domain.Memo;
 
 import java.util.List;
 

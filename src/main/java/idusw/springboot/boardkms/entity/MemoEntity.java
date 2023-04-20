@@ -1,4 +1,4 @@
-package iducs.springboot.boardkms.entity;
+package idusw.springboot.boardkms.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
