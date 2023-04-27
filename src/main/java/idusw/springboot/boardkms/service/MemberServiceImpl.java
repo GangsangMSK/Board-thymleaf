@@ -50,6 +50,7 @@ public class MemberServiceImpl implements MemberService {
         //entity : service <-> repository
         List<MemberEntity> entities = memberRepository.findAll(); //select * from a_memo;
         for (MemberEntity entity : entities) {
+            //Lamda식 -> Lombok Library 사용
             Member member = Member.builder()
                     .seq(entity.getSeq())
                     .email(entity.getEmail())
@@ -57,7 +58,6 @@ public class MemberServiceImpl implements MemberService {
                     .build();
             result.add(member);
         }
-
         return result;
     }
 
@@ -69,5 +69,20 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public int delete(Member member) {
         return 0;
+    }
+
+    @Override
+    public Member login(Member member) {
+        Member result = null;
+        MemberEntity entitiy = memberRepository.getByEmailPw(member.getEmail(), member.getPw());
+        if (entitiy != null) {
+            result = Member.builder()
+                    .seq(entitiy.getSeq())
+                    .email(entitiy.getEmail())
+                    .name(entitiy.getName())
+                    .pw(entitiy.getPw())
+                    .build();
+        }
+        return result;
     }
 }

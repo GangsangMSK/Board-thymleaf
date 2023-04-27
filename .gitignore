@@ -38,3 +38,8 @@ out/
 
 ### macOS ###
 .DS_Store
+src/main/resources/static/.DS_Store
+src/main/resources/static/scss/.DS_Store
+src/main/resources/static/vendor/.DS_Store
+src/main/resources/static/vendor/bootstrap/.DS_Store
+src/main/resources/static/vendor/fontawesome-free/.DS_Store
