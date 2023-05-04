@@ -1,12 +1,18 @@
 package idusw.springboot.boardkms.service;
 
 import idusw.springboot.boardkms.domain.Member;
+import idusw.springboot.boardkms.domain.PageRequestDTO;
+import idusw.springboot.boardkms.domain.PageResultDTO;
 import idusw.springboot.boardkms.entity.MemberEntity;
 import idusw.springboot.boardkms.repository.MemberRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -55,6 +61,9 @@ public class MemberServiceImpl implements MemberService {
                     .seq(entity.getSeq())
                     .email(entity.getEmail())
                     .name(entity.getName())
+                    .pw(entity.getPw())
+                    .regDate(entity.getRegDate())
+                    .modDate(entity.getModDate())
                     .build();
             result.add(member);
         }
@@ -63,12 +72,26 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public int update(Member member) {
-        return 0;
+        MemberEntity entity = MemberEntity.builder()
+                .seq(member.getSeq())
+                .email(member.getEmail())
+                .name(member.getName())
+                .pw(member.getPw())
+                .build();
+        if(memberRepository.save(entity) != null) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     @Override
     public int delete(Member member) {
-        return 0;
+        MemberEntity entity = MemberEntity.builder()
+                .seq(member.getSeq())
+                .build();
+        memberRepository.deleteById(entity.getSeq());
+        return 1;
     }
 
     @Override
@@ -84,5 +107,15 @@ public class MemberServiceImpl implements MemberService {
                     .build();
         }
         return result;
+    }
+
+    @Override
+    public PageResultDTO<Member, MemberEntity> getList(PageRequestDTO requestDTO) {
+        Pageable pageable = requestDTO.getPageable(Sort.by("seq").ascending());
+
+        Page<MemberEntity> result = memberRepository.findAll(pageable);
+        Function<MemberEntity, Member> fn = (entity -> entityToDto(entity));
+
+        return new PageResultDTO<>(result, fn);
     }
 }

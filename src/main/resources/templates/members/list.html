@@ -57,6 +57,9 @@
                                             <th>seq</th>
                                             <th>email</th>
                                             <th>name</th>
+                                            <th>password</th>
+                                            <th>regDate</th>
+                                            <th>modDate</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -64,16 +67,20 @@
                                             <th>seq</th>
                                             <th>email</th>
                                             <th>name</th>
+                                            <th>password</th>
+                                            <th>regDate</th>
+                                            <th>modDate</th>
                                     </tfoot>
-                                    <li th:each="member : ${memberList}">
                                     <tbody>
-                                        <tr>
+                                        <tr th:each="member : ${memberList}">
                                             <td>[[${member.seq}]]</td>
                                             <td>[[${member.email}]]</td>
                                             <td>[[${member.name}]]</td>
+                                            <td>[[${member.pw}]]</td>
+                                            <td>[[${member.regDate}]]</td>
+                                            <td>[[${member.modDate}]]</td>
                                         </tr>
                                     </tbody>
-                                    </li>
                                 </table>
                             </div>
                         </div>
