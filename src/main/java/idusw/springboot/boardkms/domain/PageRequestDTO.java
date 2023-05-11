@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 
 @Builder
 @AllArgsConstructor
-@Data
+@Data //@Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor
 public class PageRequestDTO {
     private int page;
     private int size;
