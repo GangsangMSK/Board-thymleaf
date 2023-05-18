@@ -4,7 +4,6 @@ import lombok.Data;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.beans.PropertyEditorSupport;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -14,37 +13,48 @@ import java.util.stream.IntStream;
 public class PageResultDTO<DTO, EN> {
     private List<DTO> dtoList;
 
-    private int totalPage;
-    private int curPage;
-    private int size;
-    private  int totalRows;
+    private int totalPage; // 총 페이지 번호
+    private int curPage; // 현재 페이지 번호
+    private int size; // 페이지당 데이터 개수
+    private int perPage; // 한 페이지당 보여줄 페이지 개수
 
-    private int start, end;
-    private boolean prev, next;
+    private long totalRows; // 총 데이터 개수
+    private int startRow;
+    private int endRow;
 
-    private List<Integer> pageList;
+    private int start, end; // 시작 페이지 번호, 끝 페이지 번호
+    private boolean prev, next; // 이전, 다음
 
-    public PageResultDTO(Page<EN> result, Function<EN, DTO> fn) {
+    private List<Integer> pageList; // 페이지 번호 목록
+
+    public PageResultDTO(Page<EN> result, Function<EN, DTO> fn, int perPage) {
+        totalRows = result.getTotalElements();
         dtoList = result.stream().map(fn).collect(Collectors.toList());
         totalPage = result.getTotalPages();
+        this.perPage = perPage;
         makePageList(result.getPageable());
     }
 
     private void makePageList(Pageable pageable) {
+
         this.curPage = pageable.getPageNumber() + 1;
-        this.size = pageable.getPageSize();;
+        this.size = pageable.getPageSize();
 
-        int tempEnd = (int)(Math.ceil(curPage / (double)size)) * size;
+        int tempEnd = (int)(Math.ceil(curPage / (double)perPage)) * perPage;
 
-        start = tempEnd - (size - 1);
-        end = (totalPage > tempEnd) ? tempEnd : totalPage;
+        this.start = tempEnd - (perPage - 1);
+        this.end = (totalPage > tempEnd) ? tempEnd : totalPage;
 
-        prev = start > 1;
-        next = totalPage > tempEnd;
+        this.startRow = start + (curPage - 1) * size;
+        this.endRow = startRow + size - 1;
 
-        pageList = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
+        this.prev = start > 1;
+        this.next = totalPage > tempEnd;
+
+        this.pageList = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
         for(Integer i : pageList){
             System.out.println(i.intValue());
         }
+
     }
 }

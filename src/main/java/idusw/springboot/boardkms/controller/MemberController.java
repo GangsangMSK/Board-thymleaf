@@ -61,11 +61,21 @@ public class MemberController {
             return  "/errors/message";
         }
     }
-    @GetMapping(value = {"", "/{page}/{size}"}) // /?page=&size= 사용시 RequestParam으로 받아야 함
-    public String getMemberListByPage(@PathVariable("page")int page, @PathVariable("size") int size, Model model){
+    @GetMapping(value = {"", "/"}) // /?page=&size= 사용시 RequestParam으로 받아야 함
+    //@GetMapping(value = {"", "/"})
+    //@PathVariable("page")int page, @PathVariable("size") int size, Model model
+    public String getMemberListByPage(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                      @RequestParam(value = "size", required = false, defaultValue = "10") int size,
+                                      @RequestParam(value = "perPage", required = false, defaultValue = "5") int perPage,
+                                      @RequestParam(value = "type", required = false, defaultValue = "e") String type,
+                                      @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+                                      Model model){
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
                 .page(page)
                 .size(size)
+                .perPage(perPage)
+                .type(type)
+                .keyword(keyword)
                 .build();
         PageResultDTO<Member, MemberEntity> resultDTO = memberService.getList(pageRequestDTO);
         System.out.println(resultDTO);
