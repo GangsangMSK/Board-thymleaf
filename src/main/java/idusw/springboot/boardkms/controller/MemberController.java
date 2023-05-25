@@ -119,7 +119,7 @@ public class MemberController {
             return "/errors/404";
     }
 
-    @GetMapping("/register")
+    @GetMapping("/reg-form")
     public String getRegisterForm(Model model) {
         // Memeber 형의 객체를  생성하고,
         model.addAttribute("member", Member.builder().build());

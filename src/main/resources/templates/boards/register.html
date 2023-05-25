@@ -30,25 +30,26 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user" th:action="@{'/members/reg-form'}" th:object="${member}" th:method="post">
+                            <form class="user" th:action="@{'/boards/reg-form'}" th:object="${board}" th:method="post">
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="text" name="name" th:field="*{name}" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name">
+                                        <input type="text" name="title" th:field="*{title}" class="form-control form-control-user" id="exampleFirstName"
+                                            placeholder="Title">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="email" th:field="*{email}" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
+                                    <input type="text" name="content" th:field="*{content}" class="form-control form-control-user" id="exampleInputEmail"
+                                        placeholder="Content">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" name="pw" th:field="*{pw}" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                        <input type="hidden" name="writerSeq" th:value="${session.member.seq}" th:field="*{writerSeq}">
+                                        <input type="text" name="writerEmail" th:value="${session.member.email}" th:field="*{writerEmail}" class="form-control form-control-user"
+                                            id="exampleInputPassword" placeholder="Writer Email">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
+                                        <input type="text" name="writerName" th:value="${session.member.name}" th:field="*{writerName}" class="form-control form-control-user"
+                                            id="exampleRepeatPassword" placeholder="Writer Name">
                                     </div>
                                 </div>
                                 <input type="submit" value="Register Account" class="btn btn-primary btn-user btn-block">
