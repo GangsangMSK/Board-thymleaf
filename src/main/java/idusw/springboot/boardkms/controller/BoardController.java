@@ -42,7 +42,9 @@ public class BoardController {
         session = request.getSession();
         Member member = (Member) session.getAttribute("member");
         if (member != null) {
-//            board.setWriterSeq(member.getSeq());
+            board.setWriterSeq(member.getSeq());
+            board.setWriterName(member.getName());
+            board.setWriterEmail(member.getEmail());
             if (boardService.registerBoard(board) > 0) {
                 return "redirect:/";
             } else {
