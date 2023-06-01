@@ -2,15 +2,15 @@ package idusw.springboot.boardkms.service;
 
 
 import idusw.springboot.boardkms.domain.Board;
+import idusw.springboot.boardkms.domain.PageRequestDTO;
+import idusw.springboot.boardkms.domain.PageResultDTO;
 import idusw.springboot.boardkms.entity.BoardEntity;
 import idusw.springboot.boardkms.entity.MemberEntity;
-
-import java.util.List;
 
 public interface BoardService {
     int registerBoard(Board board);
     Board findBoardById(Board board);
-    List<Board> findBoardAll();
+    PageResultDTO<Board, Object[]> findBoardAll(PageRequestDTO pageRequestDTO);
     int updateBoard(Board board);
     int deleteBoard(Board board);
 
@@ -26,7 +26,7 @@ public interface BoardService {
                 .build();
         return entity;
     }
-    default Board entityToDto(BoardEntity entity, MemberEntity memberEntity){
+    default Board entityToDto(BoardEntity entity, MemberEntity memberEntity, Long replyCount){
         Board dto = Board.builder()
                 .bno(entity.getBno())
                 .title(entity.getTitle())
@@ -34,6 +34,8 @@ public interface BoardService {
                 .writerSeq(memberEntity.getSeq())
                 .writerName(memberEntity.getName())
                 .writerEmail(memberEntity.getEmail())
+                .regDate(entity.getRegDate())
+                .modDate(entity.getModDate())
                 .build();
         return dto;
     }

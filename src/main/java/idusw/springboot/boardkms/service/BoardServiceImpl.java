@@ -1,11 +1,17 @@
 package idusw.springboot.boardkms.service;
 
 import idusw.springboot.boardkms.domain.Board;
+import idusw.springboot.boardkms.domain.PageRequestDTO;
+import idusw.springboot.boardkms.domain.PageResultDTO;
 import idusw.springboot.boardkms.entity.BoardEntity;
+import idusw.springboot.boardkms.entity.MemberEntity;
 import idusw.springboot.boardkms.repository.BoardRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.function.Function;
+
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -31,8 +37,14 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<Board> findBoardAll() {
-        return null;
+    public PageResultDTO<Board, Object[]> findBoardAll(PageRequestDTO pageRequestDTO) {
+        Page<Object[]> result = boardRepository.searchPage(
+                pageRequestDTO.getType(),
+                pageRequestDTO.getKeyword(),
+                pageRequestDTO.getPageable(Sort.by("bno").descending()));
+
+        Function<Object[], Board> fn = (entity -> entityToDto((BoardEntity) entity[0], (MemberEntity) entity[1], (Long) entity[2]));
+        return new PageResultDTO<>(result, fn, 10);
     }
 
     @Override
