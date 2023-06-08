@@ -1,10 +1,10 @@
-package idusw.springboot.service;
+package idusw.springboot.boardkms.service;
 
-import idusw.springboot.domain.Board;
-import idusw.springboot.domain.Reply;
-import idusw.springboot.entity.BoardEntity;
-import idusw.springboot.entity.ReplyEntity;
-import idusw.springboot.repository.ReplyRepository;
+import idusw.springboot.boardkms.domain.Board;
+import idusw.springboot.boardkms.domain.Reply;
+import idusw.springboot.boardkms.entity.BoardEntity;
+import idusw.springboot.boardkms.entity.ReplyEntity;
+import idusw.springboot.boardkms.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;

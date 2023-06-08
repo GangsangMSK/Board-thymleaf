@@ -1,8 +1,8 @@
-package idusw.springboot.controller;
+package idusw.springboot.boardkms.controller;
 
-import idusw.springboot.domain.Reply;
-import idusw.springboot.entity.ReplyEntity;
-import idusw.springboot.service.ReplyService;
+import idusw.springboot.boardkms.domain.Reply;
+import idusw.springboot.boardkms.entity.ReplyEntity;
+import idusw.springboot.boardkms.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;

@@ -3,23 +3,26 @@ package idusw.springboot.boardkms.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
-@Table(name = "reply_a201912014")
+@Entity // 엔티티 클래스임으로 나타내는 애노테이션
+@Table(name = "a201912014_reply") // 테이블 명을 지정하는 애노테이션
+
 @ToString(exclude = "board")
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//@Data
-public class ReplyEntity extends BaseEntity{
+
+public class ReplyEntity extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reply_a201912014_seq_gen")
-    @SequenceGenerator(sequenceName = "reply_a201912014_seq", name = "reply_a201912014_seq_gen", allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "a201912014_reply_seq_gen")
+    @SequenceGenerator(sequenceName = "a201912014_reply_seq", name = "a201912014_reply_seq_gen", initialValue = 1, allocationSize = 1)
+    // Oracle : GenerationType.SEQUENCE, Mysql/MariaDB : GenerationType.IDENTITY, auto_increment
     private Long rno;
 
-    private String text;
-    private String replier;
+    private String text; // 댓글 내용
+    private String replier; // 댓글 사용자
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private BoardEntity board;
+    private BoardEntity board; // BoardEntity : MemberEntity = N : 1,
+
 }

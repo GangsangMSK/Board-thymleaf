@@ -1,8 +1,8 @@
-package idusw.springboot.service;
+package idusw.springboot.boardkms.service;
 
-import idusw.springboot.domain.Reply;
-import idusw.springboot.entity.BoardEntity;
-import idusw.springboot.entity.ReplyEntity;
+import idusw.springboot.boardkms.domain.Reply;
+import idusw.springboot.boardkms.entity.BoardEntity;
+import idusw.springboot.boardkms.entity.ReplyEntity;
 
 import java.util.List;
 

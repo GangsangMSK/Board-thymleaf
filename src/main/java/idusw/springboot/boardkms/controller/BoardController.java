@@ -68,8 +68,8 @@ public class BoardController {
         // Long bno 값을 사용하는 방식을 Board 객체에 bno를 설정하여 사용하는 방식으로 변경
         Board board = boardService.findBoardById(Board.builder().bno(bno).build());
         boardService.updateBoard(board);
-        model.addAttribute("dto", boardService.findBoardById(board));
-        return "detail";
+        model.addAttribute("board", boardService.findBoardById(board));
+        return "/boards/detail";
     }
 
     @GetMapping("/{bno}/up-form")

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "board_a201912014")
+@Table(name = "a201912014_board")
 @ToString(exclude = "writer")
 @Getter
 @Builder
@@ -13,14 +13,14 @@ import lombok.*;
 //@Data
 public class BoardEntity extends BaseEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_a201912014_seq_gen")
-    @SequenceGenerator(sequenceName = "board_a201912014_seq", name = "board_a201912014_seq_gen", allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "a201912014_board_seq_gen")
+    @SequenceGenerator(sequenceName = "a201912014_board_seq", name = "a201912014_board_seq_gen", allocationSize = 1, initialValue = 1)
     private Long bno;
 
     @Column(length = 50, nullable = false)
     private String title;
     @Column(length = 1000, nullable = false)
     private String content;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private MemberEntity writer;
 }

@@ -22,6 +22,8 @@ public class Board {
     private String writerName;
     private String writerEmail;
 
+    private Long replyCount;
+
     //auditing
     private LocalDateTime regDate;
     private LocalDateTime modDate;

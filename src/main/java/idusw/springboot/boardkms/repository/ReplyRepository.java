@@ -1,7 +1,8 @@
-package idusw.springboot.repository;
+package idusw.springboot.boardkms.repository;
 
-import idusw.springboot.entity.BoardEntity;
-import idusw.springboot.entity.ReplyEntity;
+
+import idusw.springboot.boardkms.entity.BoardEntity;
+import idusw.springboot.boardkms.entity.ReplyEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,6 +15,8 @@ public interface ReplyRepository extends JpaRepository<ReplyEntity, Long> {
     @Modifying
     @Query("delete from ReplyEntity r where r.board.bno = :bno")
     void deleteByBno(Long bno);
+
+//    List<ReplyEntity> getReplyEntitiesByBoardOrderByBno(BoardEntity board);
 
     List<ReplyEntity> getRepliesByBoardOrderByRno(BoardEntity board);
     //List<ReplyEntity> findReplyEntitiesByBoardByRno(BoardEntity board);

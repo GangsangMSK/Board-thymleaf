@@ -33,7 +33,7 @@ public class MemberControllerTests { // Unit Test : Junit - Test Framework
         IntStream.rangeClosed(1, 101).forEach(i -> {
             MemberEntity member = MemberEntity.builder()
                     .seq(Long.valueOf(i))
-                    .email("email" + i + "@induk.ac.kr")
+                    .email("u" + i + "@induk.ac.kr")
                     .pw("pw" + i)
                     .name("name" + i)
                     .build();
